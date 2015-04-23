@@ -1,0 +1,26 @@
+<template name="khatmat">
+  {{#if currentUser}}
+    {{> createKhatma}}
+  {{else}}
+    Login/Create account to be able to add your own khatma.
+  {{/if}}
+
+  {{> pages}}
+  <div class="clearfix"></div>
+  {{> pagesNav}}
+</template>
+<template name="khatmaItem">
+  <div><a href="#" class="khatmaLink">{{name}}</a>
+    <br>Every {{period}} days, start from: {{formatDate startDate}}
+    <br>Created by: {{creatorName}}, Created at: {{createdAt}}
+  </div>
+
+</template>
+<template name="createKhatma">
+  <form class="createKhatmaForm">
+    <div><label>Name of khatma: <input type="text" name="name"></label></div>
+    <div><label>Period in days: <input type="text" name="period"></label></div>
+    <div><label>Date of start: <input type="text" name="start"></label></div>
+    <div><input type="submit"></div>
+  </form>
+</template>

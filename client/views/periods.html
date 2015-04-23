@@ -1,0 +1,19 @@
+<template name="createPeriod">
+  <form class="createPeriod">
+    <input type="submit" value="Add new period">
+  </form>
+</template>
+
+<template name="periods">
+  {{> khatma currentKhatma}}
+  {{#each periods}}
+    <div>
+      <a href="#" class="periodLink">Start date: {{formatDate startDate}}</a>
+    </div>
+  {{/each}}
+</template>
+<template name="khatma">
+  <div><a href="" class="listKhatmat">Show khatmat list</a></div>
+  <div>Khatma Name: <a href="?khatmaId={{_id}}">{{name}}</a>, Period: {{period}}, Start Date: {{formatDate  startDate}}
+  </div>
+</template>

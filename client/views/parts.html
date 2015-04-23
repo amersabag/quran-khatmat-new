@@ -1,0 +1,65 @@
+<template name="parts">
+  {{> khatma currentKhatma}}
+  {{> period currentPeriod}}
+  <div>
+    <table>
+      <thead>
+      <tr>
+        <th>Part number</th>
+        <th>Owner</th>
+        <th>Done</th>
+        <th>Options</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      {{#each parts}}
+        {{> part}}
+      {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+</template>
+
+<template name="part">
+  {{test}}
+  <tr>
+    <td>
+      {{partNumber}}
+    </td>
+    <td>
+      {{#if ownerId}}
+        {{ownerName}}
+      {{/if}}
+
+    </td>
+    <td>
+      {{#if ownerId}}
+        <input
+            type="checkbox"
+            class="setDone"
+            checked="{{done}}"
+            disabled="{{#unless currentUserIsTheOwner}}disabled{{/unless}}">
+      {{/if}}
+    </td>
+    <td>
+      {{#if ownerId}}
+        {{#if currentUserIsTheOwner}}
+          {{#unless done}}
+            <a href="" class="removeOwner">Leave this part</a>
+          {{/unless}}
+        {{/if}}
+      {{else}}
+        {{#if currentUser}}
+          <a href="" class="setOwner">Get this part</a>
+        {{/if}}
+      {{/if}}
+    </td>
+  </tr>
+</template>
+<template name="period">
+  <div><a href="" class="listPeriods">Show periods list</a></div>
+  <div>Start date: <a href="?khatmaId={{khatmaId}}&periodId={{_id}}">{{formatDate startDate}}</a></div>
+
+</template>

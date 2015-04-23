@@ -1,3 +1,6 @@
 standard-app-packages
 iron:router
 twbs:bootstrap
+ian:accounts-ui-bootstrap-3
+zimme:iron-router-active
+alethes:pages
