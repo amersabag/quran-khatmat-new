@@ -11,6 +11,10 @@ Router.route('/about', {
   name: 'about',
   controller: 'AboutController'
 });
+Router.route('/create', {
+  name: 'create',
+  controller: 'CreateController'
+});
 Router.route('/khatmat/:khatmaId/periods', {
   name: 'periods',
   controller: 'PeriodsController'
@@ -38,6 +42,9 @@ HomeController = BaseController.extend({
 });
 AboutController = BaseController.extend({
   template: 'about'
+});
+CreateController = BaseController.extend({
+  template: 'createKhatma'
 });
 
 PeriodsController = BaseController.extend({

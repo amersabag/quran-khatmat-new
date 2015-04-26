@@ -33,6 +33,16 @@
               {{/if}}
             </a>
           </li>
+          <li class="{{#if isActiveRoute regex='create'}}active{{/if}}">
+            <a href="{{pathFor route='create'}}">
+              Create
+              {{#if isActiveRoute regex='create'}}
+                <span class="sr-only">
+                                (current)
+                            </span>
+              {{/if}}
+            </a>
+          </li>
           <li class="{{#if isActiveRoute regex='about'}}active{{/if}}">
             <a href="{{pathFor route='about'}}">
               About
