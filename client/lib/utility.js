@@ -1,6 +1,3 @@
-function addDays(theDate, days) {
-  return new Date(theDate.getTime() + days * 24 * 60 * 60 * 1000);
-}
 weekday = new Array(7);
 weekday[0] = "Sunday";
 weekday[1] = "Monday";

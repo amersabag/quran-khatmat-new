@@ -7,6 +7,10 @@ Router.route('/', {
   name: 'home',
   controller: 'HomeController'
 });
+Router.route('/about', {
+  name: 'about',
+  controller: 'AboutController'
+});
 Router.route('/khatmat/:khatmaId/periods', {
   name: 'periods',
   controller: 'PeriodsController'
@@ -32,6 +36,9 @@ BaseController = RouteController.extend({
 HomeController = BaseController.extend({
   template: 'home'
 });
+AboutController = BaseController.extend({
+  template: 'about'
+});
 
 PeriodsController = BaseController.extend({
   template: 'periods',
@@ -48,7 +55,7 @@ PartsController = BaseController.extend({
     return [
       Meteor.subscribe('khatma', this.params.khatmaId),
       Meteor.subscribe('period', this.params.periodId),
-      Meteor.subscribe('parts', this.params.khatmaId, this.params.periodId)
+      Meteor.subscribe('parts', this.params.periodId)
     ]
   }
 });

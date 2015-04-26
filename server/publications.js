@@ -7,15 +7,15 @@ Meteor.publish('periods', function (khatmaId) {
 Meteor.publish('period', function (periodId) {
   return Periods.find({_id: periodId});
 });
-Meteor.publish('parts', function (khatmaId, periodId) {
-  return Khatmat.find({khatmaId: khatmaId, periodId: periodId});
+Meteor.publish('parts', function (periodId) {
+  return Parts.find({periodId: periodId});
 });
 Meteor.publish('userData', function () {
-  if (!Meteor.userId) {
-    return null;
-  }
+  var fields = this.userId
+      ? {isAdmin: 1, 'username': 1}
+      : {'username': 1};
   return Meteor.users.find(
-      Meteor.userId(),
-      {fields: {isAdmin: 1}}
-  );
+      {},
+      {fields: fields})
+      ;
 });

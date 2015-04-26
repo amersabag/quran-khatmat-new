@@ -1,15 +1,15 @@
 Template.periods.helpers({
   currentKhatma: function(){
-    return Khatmat.findOne(Router.current().route.params.khatmaId);
+    return Khatmat.findOne(Router.current().getParams().khatmaId);
   },
   periods: function () {
-    return Periods.find({khatmaId: Router.current().route.params.khatmaId});
+    return Periods.find({khatmaId: Router.current().getParams().khatmaId}, {sort: {startDate: -1}});
   }
 });
 
 Template.createPeriod.events({
-  'submit .createPeriod': function () {
-    var khatmaId = Router.current().route.params.khatmaId;
+  'submit .createPeriodForm': function () {
+    var khatmaId = Router.current().getParams().khatmaId;
     Meteor.call(
         'addPeriod',
         khatmaId,

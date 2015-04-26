@@ -1,23 +1,19 @@
 Template.parts.helpers({
   currentKhatma: function(){
-    return Khatmat.findOne(Router.current().route.params.khatmaId);
+    return Khatmat.findOne(Router.current().getParams().khatmaId);
   },
   currentPeriod: function(){
-    return Periods.findOne(Router.current().route.params.periodId);
+    return Periods.findOne(Router.current().getParams().periodId);
   },
   parts: function () {
     return Parts.find({
-      khatmaId: Router.current().route.params.khatmaId,
-      periodId: Router.current().route.params.periodId
+      periodId: Router.current().getParams().periodId
     }, {
       sort: {partNumber: 1}
     });
   }
 });
 Template.part.helpers({
-  test: function () {
-    console.log('test');
-  },
   ownerName: function () {
     var owner = Meteor.users.findOne({_id: this.ownerId});
     return owner && owner.username;
@@ -28,23 +24,48 @@ Template.part.helpers({
 });
 Template.part.events({
   'click .setOwner': function () {
-    Parts.update(
-        {_id: this._id},
-        {$set: {ownerId: Meteor.userId()}}
+    Meteor.call(
+        'setOwner',
+        this._id,
+        function (error) {
+          if (error) {
+            alert(getErrorMessage(error.error));
+          }
+          else {
+            //Router.go('periods', {khatmaId: result});
+          }
+        }
     );
     return false;
   },
   'click .removeOwner': function () {
-    Parts.update(
-        {_id: this._id},
-        {$set: {ownerId: null}}
+    Meteor.call(
+        'removeOwner',
+        this._id,
+        function (error) {
+          if (error) {
+            alert(getErrorMessage(error.error));
+          }
+          else {
+            //Router.go('periods', {khatmaId: result});
+          }
+        }
     );
     return false;
   },
   'click .setDone': function (event) {
-    Parts.update(
-        {_id: this._id},
-        {$set: {done: !!event.target.checked}}
+    Meteor.call(
+        'setDone',
+        this._id,
+        !!event.target.checked,
+        function (error) {
+          if (error) {
+            alert(getErrorMessage(error.error));
+          }
+          else {
+            //Router.go('periods', {khatmaId: result});
+          }
+        }
     );
   }
 });

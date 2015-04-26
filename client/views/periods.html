@@ -1,19 +1,21 @@
 <template name="createPeriod">
-  <form class="createPeriod">
-    <input type="submit" value="Add new period">
+  <form class="createPeriodForm">
+    <button type="submit" class="btn btn-default">Add new period</button>
   </form>
 </template>
 
 <template name="periods">
   {{> khatma currentKhatma}}
+  {{#if currentUser}}
+    {{> createPeriod}}
+  {{/if}}
   {{#each periods}}
-    <div>
-      <a href="#" class="periodLink">Start date: {{formatDate startDate}}</a>
-    </div>
+    <h2>
+      <a href="{{pathFor route='parts' periodId=_id}}" class="periodLink">Start date: {{formatDate startDate}}</a>
+    </h2>
   {{/each}}
 </template>
 <template name="khatma">
-  <div><a href="" class="listKhatmat">Show khatmat list</a></div>
-  <div>Khatma Name: <a href="?khatmaId={{_id}}">{{name}}</a>, Period: {{period}}, Start Date: {{formatDate  startDate}}
-  </div>
+  <h1>Khatma Name: <a href="{{pathFor route='periods' khatmaId=_id}}">{{name}}</a></h1>
+  Period: {{period}}, Start Date: {{formatDate  startDate}}
 </template>

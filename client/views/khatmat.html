@@ -4,23 +4,45 @@
   {{else}}
     Login/Create account to be able to add your own khatma.
   {{/if}}
-
+<hr>
   {{> pages}}
   <div class="clearfix"></div>
   {{> pagesNav}}
 </template>
 <template name="khatmaItem">
-  <div><a href="#" class="khatmaLink">{{name}}</a>
-    <br>Every {{period}} days, start from: {{formatDate startDate}}
-    <br>Created by: {{creatorName}}, Created at: {{createdAt}}
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>
+        <a href="{{pathFor route='periods' khatmaId=_id}}" class="khatmaLink">{{name}}</a>
+        {{#if currentUserIsOwnerOrAdmin}}
+            <button type="button" class="close deleteKhatma" aria-label="delete"><span aria-hidden="true">&times;</span></button>
+        {{/if}}
+      </h1>
+      Every {{period}} days, start from: {{formatDate startDate}}
+      <br>Created by: <strong>{{creatorName}}</strong>, Created at: <strong>{{createdAt}}</strong>
+    </div>
   </div>
-
 </template>
 <template name="createKhatma">
   <form class="createKhatmaForm">
-    <div><label>Name of khatma: <input type="text" name="name"></label></div>
-    <div><label>Period in days: <input type="text" name="period"></label></div>
-    <div><label>Date of start: <input type="text" name="start"></label></div>
-    <div><input type="submit"></div>
+    <h2>Create new khatma</h2>
+    <div class="form-group">
+      <label for="khatmaNameInput">Name of khatma</label>
+      <input type="text" name="khatmaName" class="form-control" id="khatmaNameInput" placeholder="Name of khatma">
+    </div>
+    <div class="form-group">
+      <label for="khatmaPeriodInput">Period of days</label>
+      <input type="text" name="khatmaPeriod" class="form-control" id="khatmaPeriodInput" placeholder="Period of days">
+    </div>
+    <div class="form-group">
+      <label for="khatmaStartDateInput">Start date</label>
+      <input type="text" name="khatmaStartDate" class="form-control" id="khatmaStartDateInput" placeholder="Start date">
+    </div>
+    <!-- <div class="checkbox">
+      <label>
+        <input type="checkbox" name="private"> Private khatma
+      </label>
+    </div>-->
+    <button type="submit" class="btn btn-default">Submit</button>
   </form>
 </template>
