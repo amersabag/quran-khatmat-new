@@ -23,31 +23,71 @@ Router.route('/khatmat/:khatmaId/periods/:periodId/parts', {
   name: 'parts',
   controller: 'PartsController'
 });
-
-
+Router.route('/my/khatmat', {
+  name: 'my.khatmat',
+  controller: 'MyKhatmatController'
+});
+Router.route('/my/parts', {
+  name: 'my.parts',
+  controller: 'MyPartsController'
+});
 BaseController = RouteController.extend({
   layoutTemplate: 'layout',
   loadingTemplate: 'loading',
-  notFoundTemplate: 'notFound',
+  notFoundTemplate: 'notFound'
+});
+PublicController = BaseController.extend({
   onBeforeAction: function () {
     KhatmatPages.unsubscribe();
+    MyKhatmatPages.unsubscribe();
+    MyPartsPages.unsubscribe();
     this.next();
-  },
-  action: function () {
-    this.render();
   }
 });
-HomeController = BaseController.extend({
+MyController = BaseController.extend({
+  onBeforeAction: function(){
+    if(!Meteor.userId())
+    {
+      Router.go('home');
+    }
+    else
+    {
+      KhatmatPages.unsubscribe();
+      this.next();
+    }
+  }
+});
+MyKhatmatController = MyController.extend({
+  template: 'myKhatmat',
+  onBeforeAction: function(){
+    Session.set('myKhatmatItemHaveNoData', true);
+    MyKhatmatPages.set({
+      filters: {createdBy: Meteor.userId()}
+    });
+    this.next();
+  }
+});
+MyPartsController = MyController.extend({
+  template: 'myParts',
+  onBeforeAction: function(){
+    MyKhatmatPages.set({
+      filters: {ownerId: Meteor.userId()}
+    });
+    this.next();
+  }
+
+});
+HomeController = PublicController.extend({
   template: 'home'
 });
-AboutController = BaseController.extend({
+AboutController = PublicController.extend({
   template: 'about'
 });
-CreateController = BaseController.extend({
+CreateController = PublicController.extend({
   template: 'createKhatma'
 });
 
-PeriodsController = BaseController.extend({
+PeriodsController = PublicController.extend({
   template: 'periods',
   waitOn: function () {
     return [
@@ -56,7 +96,7 @@ PeriodsController = BaseController.extend({
     ]
   }
 });
-PartsController = BaseController.extend({
+PartsController = PublicController.extend({
   template: 'parts',
   waitOn: function () {
     return [

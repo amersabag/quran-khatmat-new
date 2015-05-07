@@ -1,0 +1,14 @@
+<template name="myParts">
+  {{#if myPartsItemHaveData}}
+    {{> pages}}
+    {{> pagesNav}}
+  {{else}}
+    You don't have any parts yet. You are wasting your life!!! Go, pick some part from a khatma and read, may Allah (SWT) guide you to the truth before you have no chance.
+  {{/if}}
+</template>
+<template name="myPartsItem">
+  {{myPartsItemHaveData}}
+  Khatma: <a href="{{pathFor 'periods'}}">{{khatmaName}}</a>
+  <br>Period: <a href="{{pathFor 'parts'}}">{{formatDate periodStartDate}}</a>
+  <br>{{partNumber}}, {{#if done}}done{{else}}not done{{/if}}
+</template>

@@ -1,0 +1,13 @@
+<template name="myKhatmat">
+  {{> pages}}
+  {{> pagesNav}}
+
+  {{#if myKhatmatItemHaveNoData}}
+    You don't have any khatma yet. You can <a href="{{pathFor 'create'}}">create</a> one now.
+  {{/if}}
+</template>
+<template name="myKhatmatItem">
+  {{myKhatmatItemHaveData}}
+  Khatma: <a href="{{pathFor 'periods'}}">{{name}}</a>
+  <br>Start date: {{formatDate startDate}}
+</template>
