@@ -16,6 +16,6 @@
   {{/each}}
 </template>
 <template name="khatma">
-  <h1><a href="{{pathFor route='periods' khatmaId=_id}}">{{name}}</a></h1>
+  <h1>Khatma: <a href="{{pathFor route='periods' khatmaId=_id}}">{{name}}</a></h1>
   Period: {{period}}, Start Date: {{formatDate  startDate}}
 </template>

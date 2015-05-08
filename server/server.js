@@ -7,6 +7,7 @@ Meteor.startup(function () {
       {'khatmaId': 1, 'periodId': 1, 'partNumber': 1},
       {unique: 1, background: 1}
   );
+
   if(!Meteor.users.find({username: 'admin'}).count())
   {
     var adminId = Accounts.createUser({
@@ -19,6 +20,55 @@ Meteor.startup(function () {
     });
     Meteor.users.update({_id: adminId}, {$set: {isAdmin: true}});
   }
+	var user = Meteor.users.findOne({username: 'amer'});
+	var userId = null;
+	if(!user)
+	{
+		userId = Accounts.createUser({
+			username: 'amer',
+			email : 'amer@sabag.net',
+			password : '123456'
+		});
+	}
+	else
+	{
+		userId = user._id;
+	}
+	if(Khatmat.find().count() == 0)
+	{
+		Khatmat.insert({
+			name: 'Abu Mazen',
+			period: 7,
+			startDate: new Date('2015-03-21'),
+			createdAt: new Date(),
+			createdBy: userId
+		});
+	}
+	var periodsToDenormalize = Parts.find({khatmaName: {$exists: false}});
+	if(periodsToDenormalize.count())
+	{
+		_.each(periodsToDenormalize.fetch(), function(item){
+			var updateSet = {
+				khatmaName: Khatmat.findOne({_id: item.khatmaId}).name
+			};
+			Periods.update({_id: item._id}, {
+				$set: updateSet
+			});
+		})
+	}
+	var partsToDenormalize = Parts.find({ownerUsername: {$exists: false}});
+	if(partsToDenormalize.count())
+	{
+		_.each(partsToDenormalize.fetch(), function(item){
+			var user = Meteor.users.findOne({_id:item.ownerId});
+			var updateSet = {
+				khatmaName: Khatmat.findOne({_id: item.khatmaId}).name,
+				periodStartDate: Periods.findOne({_id: item.periodId}).startDate,
+				ownerUsername: user ? user.username : null
+			};
+			Parts.update({_id: item._id}, {
+				$set: updateSet
+			});
+		})
+	}
 });
-
-

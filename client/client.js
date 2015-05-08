@@ -2,7 +2,6 @@ Template.registerHelper('formatDate', function (date) {
   return weekday[date.getDay()] + ' ' + date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
 });
 
-Meteor.subscribe('userData');
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_AND_EMAIL'
 });

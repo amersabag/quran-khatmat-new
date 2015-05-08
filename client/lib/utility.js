@@ -6,3 +6,14 @@ weekday[3] = "Wednesday";
 weekday[4] = "Thursday";
 weekday[5] = "Friday";
 weekday[6] = "Saturday";
+
+getPageNumber = function(delta){
+	if(!delta)
+	{
+		delta = 0;
+	}
+	var pageNum = Router.current().params.page
+		? parseInt(Router.current().params.page)
+		: 1;
+	return (isNaN(pageNum) ? 1 : pageNum) + delta;
+};

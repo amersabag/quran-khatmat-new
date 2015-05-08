@@ -1,11 +1,21 @@
 <template name="khatmat">
-  {{> pages}}
-  <div class="clearfix"></div>
-  {{> pagesNav}}
-  <hr>
-  You can <a href="{{pathFor route='create'}}">create your own khatma</a>.
+	{{#each khatmat}}
+    {{> khatmatItem}}
+  {{/each}}
+	<h3>
+		{{#if hasPreviousPage}}
+			<a href="{{#if previousPageIsHome}}{{pathFor route='khatmat' page=prevPageNum}}{{else}}{{pathFor route='khatmatPage' page=prevPageNum}}{{/if}}">Previous</a>
+		{{/if}}
+		{{#if hasNextPage}}
+			<a href={{pathFor route='khatmatPage' page=nextPageNum}}>Next</a>
+		{{/if}}
+	</h3>
+	{{#if haveNoData}}
+		<hr>
+	  You can <a href="{{pathFor route='create'}}">create your own khatma</a>.
+	{{/if}}
 </template>
-<template name="khatmaItem">
+<template name="khatmatItem">
   <div class="row">
     <div class="col-xs-12">
       <h1>
@@ -15,7 +25,7 @@
         {{/if}}
       </h1>
       Every {{period}} days, start from: {{formatDate startDate}}
-      <br>Created by: <strong>{{creatorName}}</strong>, Created at: <strong>{{createdAt}}</strong>
+      <br>Created by: <strong>{{creatorName}}</strong>, Created at: <strong>{{formatDate createdAt}}</strong>
     </div>
   </div>
 </template>
