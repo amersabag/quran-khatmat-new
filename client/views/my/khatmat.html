@@ -20,11 +20,14 @@
 </template>
 <template name="myKhatmatItem">
 	<div class="row">
-		<div class="col-xs-3">
-			<h3><a href="{{pathFor 'periods' khatmaId=_id}}">{{name}}</a></h3>
+		<div class="col-xs-4">
+			<h4><a href="{{pathFor 'periods' khatmaId=_id}}">{{name}}</a></h4>
 		</div>
     <div class="col-xs-4">
-	    <h3>{{formatDate startDate}}</h3>
+	    <h4>Every {{period}} days</h4>
+    </div>
+    <div class="col-xs-4">
+	    <h4>Started: {{formatDate startDate}}</h4>
     </div>
 	</div>
 </template>
