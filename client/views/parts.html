@@ -1,61 +1,49 @@
 <template name="parts">
   {{> khatma currentKhatma}}
   {{> period currentPeriod}}
-  <div class="table-responsive">
-    <table class="table">
-      <thead>
-      <tr>
-        <th>#</th>
-        <th>Owner</th>
-        <th>Done</th>
-        <th>Options</th>
-      </tr>
-      </thead>
-      <tbody>
-
-      {{#each parts}}
-        {{> part}}
-      {{/each}}
-      </tbody>
-    </table>
-  </div>
+	<div class="row">
+		<div class="col-xs-2">#</div>
+		<div class="col-xs-3">Owner</div>
+    <div class="col-xs-3">Done</div>
+    <div class="col-xs-4">&nbsp;</div>
+	</div>
+  {{#each parts}}
+    {{> part}}
+  {{/each}}
 
 </template>
 
 <template name="part">
-  <tr>
-    <td>
-      {{partNumber}}
-    </td>
-    <td>
-      {{#if ownerId}}
-        {{ownerName}}
-      {{/if}}
-
-    </td>
-    <td>
-      {{#if ownerId}}
-        <label><input
-            type="checkbox"
-            class="setDone"
-            checked="{{done}}"
-            disabled="{{#unless currentUserIsTheOwner}}disabled{{/unless}}"></label>
-      {{/if}}
-    </td>
-    <td>
-      {{#if ownerId}}
-        {{#if currentUserIsTheOwner}}
-          {{#unless done}}
-            <a href="" class="removeOwner">Leave</a>
-          {{/unless}}
-        {{/if}}
-      {{else}}
-        {{#if currentUser}}
-          <a href="" class="setOwner">Take</a>
-        {{/if}}
-      {{/if}}
-    </td>
-  </tr>
+	<div class="row">
+		<div class="col-xs-2">{{partNumber}}</div>
+		<div class="col-xs-3">
+			{{#if ownerId}}
+				{{ownerName}}
+			{{/if}}
+		</div>
+		<div class="col-xs-3">
+			{{#if ownerId}}
+				<label><input
+					type="checkbox"
+					class="setDone"
+					checked="{{done}}"
+					disabled="{{#unless currentUserIsTheOwner}}disabled{{/unless}}"></label>
+			{{/if}}
+		</div>
+		<div class="col-xs-4">
+			{{#if ownerId}}
+				{{#if currentUserIsTheOwner}}
+					{{#unless done}}
+						<a href="" class="removeOwner">Leave</a>
+					{{/unless}}
+				{{/if}}
+			{{else}}
+				{{#if currentUser}}
+					<a href="" class="setOwner">Take</a>
+				{{/if}}
+			{{/if}}
+		</div>
+	</div>
 </template>
 <template name="period">
   <h2>Period Start date: {{formatDate startDate}}</h2>

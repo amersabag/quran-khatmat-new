@@ -1,23 +1,14 @@
 <template name="myParts">
-	<div class="table-responsive">
-		<table class="table">
-			<thead>
-			<tr>
-				<th>Khatma</th>
-				<th>Period</th>
-				<th>#</th>
-				<th>Done</th>
-				<th>Options</th>
-			</tr>
-			</thead>
-			<tbody>
-
-			{{#each myParts}}
-				{{> myPartsItem}}
-			{{/each}}
-			</tbody>
-		</table>
+	<div class="row">
+		<div class="col-xs-4">Khatma</div>
+		<div class="col-xs-3">Period</div>
+		<div class="col-xs-1">#</div>
+		<div class="col-xs-1">Done</div>
+		<div class="col-xs-3">&nbsp;</div>
 	</div>
+	{{#each myParts}}
+		{{> myPartsItem}}
+	{{/each}}
 
 	<h3>
 		{{#if hasPreviousPage}}
@@ -33,27 +24,21 @@
   {{/if}}
 </template>
 <template name="myPartsItem">
-	<tr>
-		<td>
-			<a href="{{pathFor 'periods'}}">{{khatmaName}}</a>
-		</td>
-		<td>
-			<a href="{{pathFor 'parts'}}">{{formatDate periodStartDate}}</a>
-		</td>
-		<td>
-			{{partNumber}}
-		</td>
-		<td>
+	<div class="row">
+		<div class="col-xs-4"><a href="{{pathFor 'periods'}}">{{khatmaName}}</a></div>
+		<div class="col-xs-3"><a href="{{pathFor 'parts'}}">{{formatDate periodStartDate}}</a></div>
+		<div class="col-xs-1">{{partNumber}}</div>
+		<div class="col-xs-1">
 			<label><input
 				type="checkbox"
 				class="setDone"
 				checked="{{done}}"
 				></label>
-		</td>
-		<td>
+		</div>
+		<div class="col-xs-3">
 			{{#unless done}}
 				<a href="" class="removeOwner">Leave</a>
 			{{/unless}}
-		</td>
-	</tr>
+		</div>
+	</div>
 </template>

@@ -1,5 +1,5 @@
 Template.registerHelper('formatDate', function (date) {
-  return weekday[date.getDay()] + ' ' + date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+  return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
 });
 
 Accounts.ui.config({
