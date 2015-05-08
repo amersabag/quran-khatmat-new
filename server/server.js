@@ -8,7 +8,12 @@ Meteor.startup(function () {
       {unique: 1, background: 1}
   );
 
-  if(!Meteor.users.find({username: 'admin'}).count())
+  if(!Meteor.users.find({
+		  $or: [
+			  {username: 'admin'},
+			  {emails: { $elemMatch: { address: 'amersabag@gmail.com' }}}
+		  ]
+	  }).count())
   {
     var adminId = Accounts.createUser({
       username: 'admin',
@@ -20,7 +25,12 @@ Meteor.startup(function () {
     });
     Meteor.users.update({_id: adminId}, {$set: {isAdmin: true}});
   }
-	var user = Meteor.users.findOne({username: 'amer'});
+	var user = Meteor.users.findOne({
+		$or: [
+			{username: 'amer'},
+			{emails: { $elemMatch: { address: 'amer@sabag.net' }}}
+		]
+	});
 	var userId = null;
 	if(!user)
 	{
