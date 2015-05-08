@@ -1,47 +1,45 @@
 <template name="parts">
   {{> khatma currentKhatma}}
   {{> period currentPeriod}}
-	<div class="row">
-		<div class="col-xs-2">#</div>
-		<div class="col-xs-3">Owner</div>
-    <div class="col-xs-3">Done</div>
-    <div class="col-xs-4">&nbsp;</div>
-	</div>
   {{#each parts}}
     {{> part}}
   {{/each}}
-
 </template>
 
 <template name="part">
 	<div class="row">
-		<div class="col-xs-2">{{partNumber}}</div>
-		<div class="col-xs-3">
-			{{#if ownerId}}
-				{{ownerName}}
-			{{/if}}
+		<div class="col-xs-2">
+			<h4>{{partNumber}}</h4>
 		</div>
-		<div class="col-xs-3">
-			{{#if ownerId}}
+		<div class="col-xs-5">
+			<h4>{{#if ownerId}}
+				{{ownerName}}
+			{{/if}}</h4>
+		</div>
+		<div class="col-xs-2">
+			<h4>{{#if ownerId}}
 				<label><input
 					type="checkbox"
 					class="setDone"
 					checked="{{done}}"
 					disabled="{{#unless currentUserIsTheOwner}}disabled{{/unless}}"></label>
 			{{/if}}
+			</h4>
 		</div>
-		<div class="col-xs-4">
+		<div class="col-xs-2">
+			<h4>
 			{{#if ownerId}}
 				{{#if currentUserIsTheOwner}}
 					{{#unless done}}
-						<a href="" class="removeOwner">Leave</a>
+						<span title="Leave" class="removeOwner glyphicon glyphicon-minus"></span>
 					{{/unless}}
 				{{/if}}
 			{{else}}
 				{{#if currentUser}}
-					<a href="" class="setOwner">Take</a>
+					<span title="Take" class="setOwner glyphicon glyphicon-plus"></span>
 				{{/if}}
 			{{/if}}
+			</h4>
 		</div>
 	</div>
 </template>

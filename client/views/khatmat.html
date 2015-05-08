@@ -2,17 +2,20 @@
 	{{#each khatmat}}
     {{> khatmatItem}}
   {{/each}}
+	<nav>
+		<ul class="pager">
+			{{#if hasPreviousPage}}
+				<li><a href="{{#if previousPageIsHome}}{{pathFor route='khatmat' page=prevPageNum}}{{else}}{{pathFor route='khatmatPage' page=prevPageNum}}{{/if}}">Previous</a></li>
+			{{/if}}
+			{{#if hasNextPage}}
+				<li><a href={{pathFor route='khatmatPage' page=nextPageNum}}>Next</a></li>
+			{{/if}}
+		</ul>
+	</nav>
 	<h3>
-		{{#if hasPreviousPage}}
-			<a href="{{#if previousPageIsHome}}{{pathFor route='khatmat' page=prevPageNum}}{{else}}{{pathFor route='khatmatPage' page=prevPageNum}}{{/if}}">Previous</a>
-		{{/if}}
-		{{#if hasNextPage}}
-			<a href={{pathFor route='khatmatPage' page=nextPageNum}}>Next</a>
-		{{/if}}
 	</h3>
 	{{#if haveNoData}}
-		<hr>
-	  You can <a href="{{pathFor route='create'}}">create your own khatma</a>.
+		<div class="alert alert-info" role="alert">You can <a class="alert-link" href="{{pathFor route='create'}}">create your own khatma</a>.</div>
 	{{/if}}
 </template>
 <template name="khatmatItem">

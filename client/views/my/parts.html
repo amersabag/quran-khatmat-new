@@ -1,44 +1,46 @@
 <template name="myParts">
-	<div class="row">
-		<div class="col-xs-4">Khatma</div>
-		<div class="col-xs-3">Period</div>
-		<div class="col-xs-1">#</div>
-		<div class="col-xs-1">Done</div>
-		<div class="col-xs-3">&nbsp;</div>
-	</div>
+	<h1>My Parts</h1>
 	{{#each myParts}}
 		{{> myPartsItem}}
 	{{/each}}
 
-	<h3>
-		{{#if hasPreviousPage}}
-			<a href="{{#if previousPageIsHome}}{{pathFor route='my.parts' page=prevPageNum}}{{else}}{{pathFor route='my.parts.page' page=prevPageNum}}{{/if}}">Previous</a>
-		{{/if}}
-		{{#if hasNextPage}}
-			<a href={{pathFor route='my.parts.page' page=nextPageNum}}>Next</a>
-		{{/if}}
-	</h3>
+	<nav>
+		<ul class="pager">
+			{{#if hasPreviousPage}}
+				<li><a href="{{#if previousPageIsHome}}{{pathFor route='my.parts' page=prevPageNum}}{{else}}{{pathFor route='my.parts.page' page=prevPageNum}}{{/if}}">Previous</a></li>
+			{{/if}}
+			{{#if hasNextPage}}
+				<li><a href={{pathFor route='my.parts.page' page=nextPageNum}}>Next</a></li>
+			{{/if}}
 
+		</ul>
+	</nav>
 	{{#if haveNoData}}
-    You don't have any parts yet. You are wasting your life!!! Go, pick some part from a khatma and read, may Allah (SWT) guide you to the truth before you have no chance.
+		<div class="alert alert-info" role="alert">You don't have any parts yet. You are wasting your life!!! Go, pick some part from a khatma and read, may Allah (SWT) guide you to the truth before you have no chance.</div>
   {{/if}}
 </template>
 <template name="myPartsItem">
 	<div class="row">
-		<div class="col-xs-4"><a href="{{pathFor 'periods'}}">{{khatmaName}}</a></div>
-		<div class="col-xs-3"><a href="{{pathFor 'parts'}}">{{formatDate periodStartDate}}</a></div>
-		<div class="col-xs-1">{{partNumber}}</div>
-		<div class="col-xs-1">
-			<label><input
-				type="checkbox"
-				class="setDone"
-				checked="{{done}}"
-				></label>
+		<div class="col-xs-4">
+			<h4><a href="{{pathFor 'parts'}}">{{formatDate periodStartDate}}</a></h4>
 		</div>
-		<div class="col-xs-3">
-			{{#unless done}}
-				<a href="" class="removeOwner">Leave</a>
-			{{/unless}}
+		<div class="col-xs-5">
+			<h4><a href="{{pathFor 'periods'}}">{{khatmaName}}</a></h4>
+		</div>
+		<div class="col-xs-1">
+			<h4>{{partNumber}}</h4>
+		</div>
+		<div class="col-xs-1">
+			<h4><label><input
+					type="checkbox"
+					class="setDone"
+					checked="{{done}}"
+					></label></h4>
+		</div>
+		<div class="col-xs-1">
+			<h4>{{#unless done}}
+				<span title="Leave" class="removeOwner glyphicon glyphicon-minus"></span>
+			{{/unless}}</h4>
 		</div>
 	</div>
 </template>

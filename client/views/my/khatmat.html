@@ -1,21 +1,30 @@
 <template name="myKhatmat">
+	<h1>My Khatmat</h1>
 	{{#each myKhatmat}}
 		{{> myKhatmatItem}}
 	{{/each}}
-	<h3>
-		{{#if hasPreviousPage}}
-			<a href="{{#if previousPageIsHome}}{{pathFor route='my.khatmat' page=prevPageNum}}{{else}}{{pathFor route='my.khatmat.page' page=prevPageNum}}{{/if}}">Previous</a>
-		{{/if}}
-		{{#if hasNextPage}}
-			<a href={{pathFor route='my.khatmat.page' page=nextPageNum}}>Next</a>
-		{{/if}}
-	</h3>
+	<nav>
+		<ul class="pager">
+			{{#if hasPreviousPage}}
+				<li><a href="{{#if previousPageIsHome}}{{pathFor route='my.khatmat' page=prevPageNum}}{{else}}{{pathFor route='my.khatmat.page' page=prevPageNum}}{{/if}}">Previous</a></li>
+			{{/if}}
+			{{#if hasNextPage}}
+				<li><a href={{pathFor route='my.khatmat.page' page=nextPageNum}}>Next</a></li>
+			{{/if}}
+		</ul>
+	</nav>
 
 	{{#if haveNoData}}
-    You don't have any khatma yet. You can <a href="{{pathFor 'create'}}">create</a> one now.
+    <div class="alert alert-info">You don't have any khatma yet. You can <a class="alert-link" href="{{pathFor 'create'}}">create</a> one now.</div>
   {{/if}}
 </template>
 <template name="myKhatmatItem">
-  <h2>Khatma: <a href="{{pathFor 'periods' khatmaId=_id}}">{{name}}</a></h2>
-  <h3>Start date: {{formatDate startDate}}</h3>
+	<div class="row">
+		<div class="col-xs-3">
+			<h3><a href="{{pathFor 'periods' khatmaId=_id}}">{{name}}</a></h3>
+		</div>
+    <div class="col-xs-4">
+	    <h3>{{formatDate startDate}}</h3>
+    </div>
+	</div>
 </template>
