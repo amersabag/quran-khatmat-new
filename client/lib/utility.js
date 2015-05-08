@@ -17,3 +17,4 @@ getPageNumber = function(delta){
 		: 1;
 	return (isNaN(pageNum) ? 1 : pageNum) + delta;
 };
+

@@ -35,5 +35,7 @@ Template.myParts.helpers({
 	}
 
 });
-Template.myPartsItem.helpers({
+Template.myPartsItem.events({
+	'click .removeOwner': removeOwner,
+	'click .setDone': setPartDone
 });

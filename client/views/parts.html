@@ -23,7 +23,6 @@
 </template>
 
 <template name="part">
-  {{test}}
   <tr>
     <td>
       {{partNumber}}
@@ -36,23 +35,23 @@
     </td>
     <td>
       {{#if ownerId}}
-        <input
+        <label><input
             type="checkbox"
             class="setDone"
             checked="{{done}}"
-            disabled="{{#unless currentUserIsTheOwner}}disabled{{/unless}}">
+            disabled="{{#unless currentUserIsTheOwner}}disabled{{/unless}}"></label>
       {{/if}}
     </td>
     <td>
       {{#if ownerId}}
         {{#if currentUserIsTheOwner}}
           {{#unless done}}
-            <a href="" class="removeOwner">Leave this part</a>
+            <a href="" class="removeOwner">Leave</a>
           {{/unless}}
         {{/if}}
       {{else}}
         {{#if currentUser}}
-          <a href="" class="setOwner">Get this part</a>
+          <a href="" class="setOwner">Take</a>
         {{/if}}
       {{/if}}
     </td>

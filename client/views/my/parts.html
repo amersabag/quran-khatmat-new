@@ -1,7 +1,24 @@
 <template name="myParts">
-	{{#each myParts}}
-		{{> myPartsItem}}
-	{{/each}}
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Khatma</th>
+				<th>Period</th>
+				<th>#</th>
+				<th>Done</th>
+				<th>Options</th>
+			</tr>
+			</thead>
+			<tbody>
+
+			{{#each myParts}}
+				{{> myPartsItem}}
+			{{/each}}
+			</tbody>
+		</table>
+	</div>
+
 	<h3>
 		{{#if hasPreviousPage}}
 			<a href="{{#if previousPageIsHome}}{{pathFor route='my.parts' page=prevPageNum}}{{else}}{{pathFor route='my.parts.page' page=prevPageNum}}{{/if}}">Previous</a>
@@ -16,7 +33,27 @@
   {{/if}}
 </template>
 <template name="myPartsItem">
-  <h2>Khatma: <a href="{{pathFor 'periods'}}">{{khatmaName}}</a></h2>
-  <h3>Period: <a href="{{pathFor 'parts'}}">{{formatDate periodStartDate}}</a></h3>
-  <h3>{{partNumber}}, {{#if done}}done{{else}}not done{{/if}}</h3>
+	<tr>
+		<td>
+			<a href="{{pathFor 'periods'}}">{{khatmaName}}</a>
+		</td>
+		<td>
+			<a href="{{pathFor 'parts'}}">{{formatDate periodStartDate}}</a>
+		</td>
+		<td>
+			{{partNumber}}
+		</td>
+		<td>
+			<label><input
+				type="checkbox"
+				class="setDone"
+				checked="{{done}}"
+				></label>
+		</td>
+		<td>
+			{{#unless done}}
+				<a href="" class="removeOwner">Leave</a>
+			{{/unless}}
+		</td>
+	</tr>
 </template>

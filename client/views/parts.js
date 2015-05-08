@@ -38,34 +38,6 @@ Template.part.events({
     );
     return false;
   },
-  'click .removeOwner': function () {
-    Meteor.call(
-        'removeOwner',
-        this._id,
-        function (error) {
-          if (error) {
-            alert(getErrorMessage(error.error));
-          }
-          else {
-            //Router.go('periods', {khatmaId: result});
-          }
-        }
-    );
-    return false;
-  },
-  'click .setDone': function (event) {
-    Meteor.call(
-        'setDone',
-        this._id,
-        !!event.target.checked,
-        function (error) {
-          if (error) {
-            alert(getErrorMessage(error.error));
-          }
-          else {
-            //Router.go('periods', {khatmaId: result});
-          }
-        }
-    );
-  }
+  'click .removeOwner': removeOwner,
+  'click .setDone': setPartDone
 });
