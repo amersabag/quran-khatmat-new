@@ -37,7 +37,10 @@ Meteor.startup(function () {
 		userId = Accounts.createUser({
 			username: 'amer',
 			email : 'amer@sabag.net',
-			password : '123456'
+			password : '123456',
+			profile: {
+				name: 'Amer Alsabbagh'
+			}
 		});
 	}
 	else
@@ -54,7 +57,7 @@ Meteor.startup(function () {
 			createdBy: userId
 		});
 	}
-	var periodsToDenormalize = Parts.find({khatmaName: {$exists: false}});
+	var periodsToDenormalize = Periods.find({khatmaName: {$exists: false}});
 	if(periodsToDenormalize.count())
 	{
 		_.each(periodsToDenormalize.fetch(), function(item){
