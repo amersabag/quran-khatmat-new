@@ -6,7 +6,7 @@
 
 <template name="periods">
   {{> khatma currentKhatma}}
-  {{#if currentUser}}
+  {{#if currentUserIsOwner}}
     {{> createPeriod}}
   {{/if}}
   {{#each periods}}

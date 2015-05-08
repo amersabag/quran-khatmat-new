@@ -4,7 +4,11 @@ Template.periods.helpers({
   },
   periods: function () {
     return Periods.find({khatmaId: Router.current().getParams().khatmaId}, {sort: {startDate: -1}});
-  }
+  },
+	currentUserIsOwner: function(){
+		return Meteor.userId()
+			&& Meteor.userId() == Khatmat.findOne(Router.current().getParams().khatmaId).createdBy;
+	}
 });
 
 Template.createPeriod.events({
