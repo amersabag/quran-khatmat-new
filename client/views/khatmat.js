@@ -39,12 +39,12 @@ Template.khatmatItem.helpers({
     return owner && owner.username;
   },
   currentUserIsOwnerOrAdmin: function(){
-    return Meteor.user().isAdmin
-        || (
-          Meteor.userId()
-          && Meteor.userId() == this.createdBy
-        )
-        ;
+    return Meteor.user()
+	    &&
+	    (
+	      Meteor.user().isAdmin
+        || Meteor.userId() == this.createdBy
+	    );
   }
 });
 Template.khatmatItem.events({
