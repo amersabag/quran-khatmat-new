@@ -14,8 +14,21 @@
       <a href="{{pathFor route='parts' periodId=_id}}" class="periodLink">Start date: {{formatDate startDate}}</a>
     </h2>
   {{/each}}
+  {{#if currentUserIsOwner}}
+    <button id="showDueReport">Show/Update Due Report</button>
+    <div id="dueReport"></div>
+  {{/if}}
 </template>
 <template name="khatma">
   <h1>Khatma: <a href="{{pathFor route='periods' khatmaId=_id}}">{{name}}</a></h1>
   Period: {{period}}, Start Date: {{formatDate  startDate}}
+</template>
+<template name="dueParts">
+  {{#each dueUsers}}
+    {{#each dueParts}}
+      P{{partNumber}}
+    {{/each}}
+    {{username}}
+    <br>
+  {{/each}}
 </template>

@@ -84,4 +84,26 @@ Meteor.startup(function () {
 			});
 		})
 	}
+  // migration of parts ownerId/ownerUsername sync bug
+  migrate('parts-owner-username-sync-bug', function(){
+    var ownedParts = Parts.find({
+      $and: [
+        {ownerId: {$exists: true}},
+        {ownerId: {$ne: null}}
+      ]
+    });
+		var count = 0;
+    ownedParts.forEach(function(ownedPart){
+      var user;
+      if(user = Meteor.users.findOne(ownedPart.ownerId))
+      {
+        if(user.username !== ownedPart.ownerUsername)
+        {
+          Parts.update({_id: ownedPart._id}, {$set: {ownerUsername: user.username}});
+					++count;
+        }
+      }
+    });
+		return "Count of synced ownerUsername is: "  + count;
+  });
 });
