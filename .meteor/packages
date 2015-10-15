@@ -7,3 +7,4 @@ accounts-password
 twbs:bootstrap
 rajit:bootstrap3-datepicker
 meteorhacks:fast-render
+standard-minifiers
